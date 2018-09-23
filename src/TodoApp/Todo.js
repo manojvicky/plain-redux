@@ -1,13 +1,10 @@
 import React from "react";
-import Reducer from "./Todo.reducer";
 
-const Todo = () =>{
+const Todo=({onClick, text, completed})=>{
     return(
-        <div>
-            Todo App
-            <Reducer />
-        </div>
+        <li onClick={onClick} style={{"textDecoration": completed ? "line-through":"none"}}>{text}</li>
     );
-}
+};
 
 export default Todo;
+
