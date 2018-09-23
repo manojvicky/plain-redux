@@ -97,6 +97,15 @@ store.dispatch({
 console.log("store after dispatch", store.getState());
 console.log("-----------------------------");
 
+console.log("-----------------------------");
+console.log("Action :: VISIBILITY_FILTER");
+store.dispatch({
+  type:"VISIBILITY_FILTER",
+  filter: "SHOW_COMPLETED"
+})
+console.log("store after dispatch", store.getState());
+console.log("-----------------------------");
+
 ReactDOM.render(
   <Todo />,
   document.getElementById("app")
