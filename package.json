@@ -28,5 +28,11 @@
     "babel-preset-react": "^6.24.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.0"
+  },
+  "devDependencies": {
+    "@babel/preset-stage-0": "^7.0.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "deep-freeze": "0.0.1",
+    "expect": "^23.6.0"
   }
 }
