@@ -1,8 +1,10 @@
 const CustomLogger = (store)=>(next)=>(action)=>{
-console.log("PREVIOUS STATE", store.getState());
-console.log("ACTION", action);
+console.group(action.type);
+console.log("%c PREVIOUS STATE","color:green;", store.getState());
+console.log(" %c ACTION", "color:blue;",action);
 next(action);
-console.log("NEXT STATE", store.getState());
+console.log("%c NEXT STATE", "color:green;" , store.getState());
+console.groupEnd();
 console.log("\n");
 }
 export default CustomLogger;

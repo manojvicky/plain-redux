@@ -1,16 +1,16 @@
 import React from "react";
 import FilterLink from "./FilterLink";
 
-const Footer =({currentFilter, FilterClick})=> {
+const Footer =({store})=> {
     return(
     <div>
-        <FilterLink filter="SHOW_ALL" currentFilter={currentFilter} onFilterClick={(filter)=>{FilterClick(filter)}}>
+        <FilterLink filter="SHOW_ALL" >
             All
         </FilterLink>
-        <FilterLink filter="SHOW_ACTIVE" currentFilter={currentFilter} onFilterClick={(filter)=>{FilterClick(filter)}}>
+        <FilterLink filter="SHOW_ACTIVE" >
             Active
         </FilterLink>
-        <FilterLink filter="SHOW_COMPLETED" currentFilter={currentFilter} onFilterClick={(filter)=>{FilterClick(filter)}}>
+        <FilterLink filter="SHOW_COMPLETED" >
             Completed
         </FilterLink>
     </div>

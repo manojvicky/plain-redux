@@ -1,24 +1,27 @@
 import React from "react";
-
-const FilterLink = ({filter, children, onFilterClick, currentFilter}) =>{
-    if(currentFilter===filter){
-        return(
-            <div style={{"display": "inline", marginLeft:"5px"}}>
-            <span>{children}</span>
-            </div>
-        );
+import PropTypes from 'prop-types';
+import Link from "./Link";
+class FilterLink extends React.Component{
+    componentDidMount(){
+        this.unsubscribe = this.context.store.subscribe(()=>{
+            this.forceUpdate();
+        })
     }
-    return(
-        <div style={{"display": "inline", marginLeft:"5px"}}>
-            <a href="#" onClick={(e)=>{
-                e.preventDefault();
-                onFilterClick(filter);
-            }
-            }>
-            {children}
-            </a>
-        </div>
-    );
-}
 
+    componentWillUnmount(){
+this.unsubscribe();
+    }
+  render(){
+      let {store} = this.context;
+      let state = store.getState();
+    return(
+        <Link active={this.props.filter===state.visibilityFilter} onClick={()=>{store.dispatch({type:"VISIBILITY_FILTER", filter: this.props.filter})}}>
+        {this.props.children}
+        </Link>
+    );
+  }
+}
+FilterLink.contextTypes = {
+    store: PropTypes.object
+}
 export default FilterLink;
