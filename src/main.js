@@ -4,33 +4,46 @@ import ReactDOM from "react-dom";
 import { Provider } from 'react-redux'
 import CustomLogger from "./CustomLogger";
 import reduxThunk from "./ReduxThunk";
-const initalState = {data: [],error:"", str:"" };
-const reducer = (state=initalState, action)=>{
-if(action.type==="CHECK_ACTION"){
-  return {...state, str: action.payload}
-}else if(action.type==="DATA_ACTION"){
-  return {...state, data: action.payload}
+
+//Inital State
+const initalState = { data: [], error: "", str: "" };
+
+//Reducer
+const reducer = (state = initalState, action) => {
+  if (action.type === "CHECK_ACTION") {
+    return { ...state, str: action.payload }
+  } else if (action.type === "DATA_ACTION") {
+    return { ...state, data: action.payload }
+  }
+  else if (action.type === "ERROR_ACTION") {
+    return { ...state, error: action.payload }
+  }
+  else {
+    return state;
+  }
 }
-else if(action.type==="ERROR_ACTION"){
-  return {...state, error: action.payload}
-}
-else{
-  return state;
-}
-}
+
+//store
 const store = createStore(reducer, applyMiddleware(reduxThunk, CustomLogger));
+
 console.log('hello store', store, store.getState());
-store.dispatch({type:"CHECK_ACTION", payload: "Yoo Baby"});
-store.dispatch((dispatch)=>{
+
+//Action Dispatch(plain object)
+store.dispatch({ type: "CHECK_ACTION", payload: "Yoo Baby" });
+
+//Action Dispatch(Redux thunk)
+store.dispatch((dispatch) => {
   fetch('https://jsonplaceholder.typicode.com/todos/1')
-  .then(response => response.json())
-  .then(json => dispatch({type:"DATA_ACTION", payload: json}))
-  .catch(err => dispatch({type:"ERROR_ACTION", payload: err.message}))
+    .then(response => response.json())
+    .then(json => dispatch({ type: "DATA_ACTION", payload: json }))
+    .catch(err => dispatch({ type: "ERROR_ACTION", payload: err.message }))
 });
+
+
 ReactDOM.render(
   <Provider store={store}>
-  <div>
-    Yoo Baby It's Redux Thunk
+    <div>
+      Yoo Baby It's Redux Thunk
   </div>
   </Provider>,
   document.getElementById("app")
