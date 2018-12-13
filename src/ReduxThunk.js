@@ -5,7 +5,6 @@ const reduxThunk = (store)=>(next)=>(action)=>{
     //     result=action
     // }
     if(Object.prototype.toString.call(action) === '[object Function]'){
-        console.log("Yoo function Action",action);
         return action(next);
     }
     console.log("thunk baba");

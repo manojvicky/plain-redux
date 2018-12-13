@@ -4,18 +4,18 @@ import ReactDOM from "react-dom";
 import { Provider } from 'react-redux'
 import CustomLogger from "./CustomLogger";
 import reduxThunk from "./ReduxThunk";
-
-// const initalState = {
-//   data: "no Data"
-// }
-const reducer = (initalstate={data: [],error:"" }, action)=>{
+const initalState = {data: [],error:"", str:"" };
+const reducer = (state=initalState, action)=>{
 if(action.type==="CHECK_ACTION"){
-  return {data: action.payload}
+  return {...state, str: action.payload}
 }else if(action.type==="DATA_ACTION"){
-  return {data: action.payload}
+  return {...state, data: action.payload}
+}
+else if(action.type==="ERROR_ACTION"){
+  return {...state, error: action.payload}
 }
 else{
-  return initalstate;
+  return state;
 }
 }
 const store = createStore(reducer, applyMiddleware(reduxThunk, CustomLogger));
